@@ -15,7 +15,7 @@ The function should:
   Example createMenuItem('tacos', 8, 'Lunch') should return {name: 'tacos', price: 8, category: 'Lunch'}
 */
 
-function createMenuItem(name, price, category){
+function createMenuItem (name, price, category) {
   return {name, price, category}
 }
 
@@ -28,7 +28,12 @@ Test your createMenuItems function by doing the following:
   
   For example: createMenuItem("pizza",5,"lunch") would return this as the object: {name:"Pizza",price:5,category:"lunch"}
 */
-
+const bagel = createMenuItem('Bagel',3,'Bakery');
+const croissant = createMenuItem('Croissant',4,'Bakery');
+const cappuccino = createMenuItem('Cappuccino',5,'Drinks');
+console.log(bagel);
+console.log(croissant);
+console.log(cappuccino);
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -48,9 +53,13 @@ export const burger = {
   name: "Burger", 
   price: 18, 
   category: "Lunch", 
-  /*Your code here*/
+  discount (customer) {
+    return this.price * {teacher:0.75, student:0.75, public:0.9}[customer]
+  }
 }
-
+console.log(burger.discount('teacher'))
+console.log(burger.discount('student'))
+console.log(burger.discount('public'))
 
 
 ///////////////Reviews (MVP)///////////////////
@@ -69,7 +78,11 @@ const reviews = [
 Using the reviews array above:
   1. log only Julius' feedback to the console - no function needed 
 */
-
+for (let i = 0; i < reviews.length; i++) {
+  if (reviews[i].name === 'Julius') {
+    console.log(reviews[i].feedback)
+  }
+}
 
 
 
@@ -79,7 +92,8 @@ Using the reviews array above do the following: (no function needed)
   2. log the whole array to the console, make sure the new review is inside of it   
 */
 
-
+reviews.push({name:'Sam', rating:5, feedback:'This is the greatest restaurant of all time!!!'})
+console.log(reviews)
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Reyna's feedback is missing! Use what you know to do the following: (no function needed) 
@@ -87,8 +101,12 @@ Reyna's feedback is missing! Use what you know to do the following: (no function
   2. log the reviews array to the console to check your work
 */
 
-
-
+for (let i = 0; i < reviews.length; i++) {
+  if (reviews[i].name === 'Reyna') {
+    reviews[i].feedback += "this place is chill with really cool people, great for getting work done on weekdays"
+  }
+}
+console.log(reviews)
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -102,8 +120,9 @@ Use the getReviewByIndex function below to do the following:
 */
 
 
-function getReviewByIndex(/*Your code here*/) {
-  /*Your code here*/
+function getReviewByIndex (array, index) {
+  const review = array[index];
+  return `${review.name} gave the restaurant a ${review.rating} star review, and their feedback was: ${review.feedback}`
 }
 
 
@@ -121,8 +140,9 @@ Use the getLastReview function below to do the following:
 */
 
 
-function getLastReview(/*Your code here*/) {
-  /*Your code here*/
+function getLastReview (arr) {
+  const last = arr[arr.length - 1];
+  return `${last.name} gave the restaurant a ${last.rating} star review, and their feedback was: ${last.feedback}`
 } 
 
 
@@ -143,9 +163,10 @@ Use the getReviewsByRating function below to do the following:
   ]
 */
 
- function getReviewByRating(/* code here */) {
-    /* code here */
+ function getReviewByRating(arr, num) {
+    return arr.filter(review => Math.floor(review.rating) === num)
   }
+console.log(getReviewByRating(reviews, 4))
 
   
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪💪💪💪💪   
@@ -161,9 +182,10 @@ Use the getLongReviews function below to do the following:
   ]
 */
 
-function getLongReviews(/* code here */) {
-    /* code here */
+function getLongReviews(arr) {
+    return arr.filter(review => review.feedback.split(' ').length > 15)
   }
+console.log(getLongReviews(reviews))
   
 
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 3: 💪💪💪💪💪💪💪💪💪💪 
@@ -184,10 +206,17 @@ Use the carMaker function below to do the following:
 */
 
 
-function carMaker(/* code here */) {
-    /* code here */
-    
+function carMaker(miles) {
+    return {
+      odometer: miles,
+      drive(distance) {
+        this.odometer += distance;
+        return this.odometer
+      }
+    }
 }
+const car1 = carMaker(10);
+console.log(car1.drive(100))
 
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
